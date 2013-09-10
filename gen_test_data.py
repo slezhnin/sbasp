@@ -3,9 +3,7 @@
 from datetime import timedelta, datetime
 import os
 import random
-
-# Константы
-DATE_FORMAT = '%d%m%y'
+from config import config
 
 
 def payments_for_day(config):
@@ -31,27 +29,22 @@ def payments_for_day(config):
                     print 'комиссия', commission / 100, commission % 100
                     line = '{}||{}|{}||{}|{}|{}||{}|0|||{}||{}'.format(current_date, osb, rp, n,
                                                                        payment_sum - commission,
-                                                                       payment_sum, commission,
-                                                                       bic, account)
+                                                                       payment_sum, commission, bic,
+                                                                       account)
                     print '   ', line
                     yield line + os.linesep
 
 
-# Загрузка конфигурации
-config_file = {}
-execfile('test_data_conf.py', config_file)
-config = config_file['config']
-print 'config', '=', config
 # Создание выходного каталога при необходимости
-if config['output_path'] and not os.path.exists(config['output_path']):
-    os.makedirs(config['output_path'])
+if config().get('input_path', '') and not os.path.exists(config()['input_path']):
+    os.makedirs(config()['input_path'])
 # Начальная дата для генератора
-period_start = datetime.strptime(config['period_start'], DATE_FORMAT).date()
+period_start = datetime.strptime(config()['period_start'], config()['date_format']).date()
 # Создание файлов с данными по дням
-for d in (period_start + timedelta(n) for n in range(config['period_length'])):
-    current_date = d.strftime(DATE_FORMAT)
-    current_filename = os.path.join(config['output_path'] or '', current_date + '.txt')
+for d in (period_start + timedelta(n) for n in range(config()['period_length'])):
+    current_date = d.strftime(config()['date_format'])
+    current_filename = os.path.join(config().get('input_path', ''), current_date + '.txt')
     print 'Создаётся файл:', current_filename
     f = open(current_filename, 'w')
-    f.writelines(payments_for_day(config))
+    f.writelines(payments_for_day(config()))
     f.close()
