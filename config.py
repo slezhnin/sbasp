@@ -4,7 +4,7 @@
 _cfg = None
 
 
-def config():
+def load_config():
     """
     Загрузка конфигурации
     """
@@ -16,3 +16,7 @@ def config():
     _cfg = cfg_file['config']
     print 'config', '=', _cfg
     return _cfg
+
+
+# Загруженная конфигурация
+CONFIG = load_config()
