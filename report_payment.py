@@ -4,11 +4,6 @@ from datetime import timedelta, datetime
 import os
 from sqlalchemy.sql import select, func
 from yaml import load
-
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
 from rollup import rollup
 from config import CONFIG
 import db
@@ -47,7 +42,7 @@ def _gen_report_lines(connection, report_template, report_start, report_end, osb
         db.table.c.account).group_by(rollup(db.table.c.pay_n))
     result = connection.execute(stmt)
     report_file = open(report_template)
-    template = load(report_file, Loader=Loader)
+    template = load(report_file)
     report_file.close()
     date_format = CONFIG.get('date_display_format', CONFIG['date_format'])
     enc = CONFIG['report_encoding']
