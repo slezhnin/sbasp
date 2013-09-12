@@ -1,0 +1,64 @@
+title: |
+
+ Отчет о точке приема {osbn}/{rpn} за период с {report_start} по {report_end}
+
+ |
+
+subtitle1: |
+
+ Дата {date}
+
+ |
+
+subtitle2: |
+
+ Банк {bic}
+
+ |
+
+subtitle3: |
+
+ Счёт {account}
+
+ #                         Сумма             Комиссия
+ |
+
+detail: |
+ {n:<10} {sum:>20} {commission:>20}
+ |
+
+subtotal3: |
+
+ Итого по счёту {account}
+
+ Количество                Сумма             Комиссия
+ {count:<10} {sum:>20} {commission:>20}
+
+ |
+
+subtotal2: |
+
+ Итого по банку {bic}
+
+ Количество                Сумма             Комиссия
+ {count:<10} {sum:>20} {commission:>20}
+
+ |
+
+subtotal1: |
+
+ Итого за день {date}
+
+ Количество                Сумма             Комиссия
+ {count:<10} {sum:>20} {commission:>20}
+
+ |
+
+total: |
+
+ Итого за период
+
+ Количество                Сумма             Комиссия
+ {count:<10} {sum:>20} {commission:>20}
+
+ |

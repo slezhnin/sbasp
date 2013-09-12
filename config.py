@@ -1,22 +1,21 @@
 # coding=utf-8
+from yaml import load
+
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 
 
-_cfg = None
-
-
-def load_config():
+def _load_config():
     """
     Загрузка конфигурации
     """
-    global _cfg
-    if _cfg:
-        return _cfg
-    cfg_file = {}
-    execfile('app.config.py', cfg_file)
-    _cfg = cfg_file['config']
-    print 'config', '=', _cfg
-    return _cfg
+    config_file = open('config.yml')
+    cfg = load(config_file, Loader=Loader)
+    config_file.close()
+    return cfg
 
 
 # Загруженная конфигурация
-CONFIG = load_config()
+CONFIG = _load_config()

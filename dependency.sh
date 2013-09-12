@@ -1,3 +1,3 @@
 #!/bin/sh
-
-pip install SQLAlchemy pymysql
+echo Installing dependencies...
+pip install SQLAlchemy pymysql PyYAML
