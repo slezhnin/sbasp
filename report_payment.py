@@ -30,7 +30,7 @@ def _gen_report_lines(connection, report_template, report_start, report_end, osb
     rpn - номер точки приёма платежей
     Используется следующий SQL:
     SELECT pay_date, bic, account, pay_n, COUNT(pay_sum), SUM(pay_sum), SUM(pay_c)
-    FROM sbassp WHERE pay_date BETWEEN :date1 AND :date2 AND osbn=:osbn AND rpn=:rpn
+    FROM sbasp WHERE pay_date BETWEEN :date1 AND :date2 AND osbn=:osbn AND rpn=:rpn
     GROUP BY pay_date, bic, account, pay_n WITH ROLLUP
     """
     fields = [db.table.c.pay_date, db.table.c.bic, db.table.c.account, db.table.c.pay_n,
